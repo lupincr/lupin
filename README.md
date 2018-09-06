@@ -1,27 +1,17 @@
-# lupin
+<p align="center">
+  <img src="https://github.com/molnarmark/lupin/blob/master/assets/logo.png"/>
+  <h1 align="center">Lupin</h1>
+  <h4 align="center">All in one task runner for Crystal.</h4>
+</p>
 
-TODO: Write a description here
+## Roadmap
 
-## Installation
-
-TODO: Write installation instructions here
-
-## Usage
-
-TODO: Write usage instructions here
-
-## Development
-
-TODO: Write development instructions here
-
-## Contributing
-
-1. Fork it (<https://github.com/your-github-user/lupin/fork>)
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create a new Pull Request
-
-## Contributors
-
-- [your-github-user](https://github.com/your-github-user) Mark Molnar - creator, maintainer
+- Add an override for `Lupin.task` to create `Lupin.src` tasks
+- Add a `Lupin.debug` method to encapsulate all if DEBUG statements
+- Implement `Lupin.dist`
+- Implement `Lupin.watch`
+- Refactor
+- Logo
+- Site
+- Docs
+- Proper, pretty readme
