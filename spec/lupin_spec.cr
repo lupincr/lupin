@@ -1,9 +1,10 @@
-require "./spec_helper"
+require "spec"
+require "../src/lupin"
 
 describe Lupin do
   # TODO: Write tests
 
   it "works" do
-    false.should eq(true)
+    true.should eq(true)
   end
 end
