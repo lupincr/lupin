@@ -30,6 +30,8 @@ module Lupin
     if mode == "directory"
       task.pipable = self.src(param, mode)
       self._debug("Detected directory: #{param}")
+    elsif mode == "command"
+      task.pipable = self.command(param)
     end
 
     task
@@ -66,6 +68,15 @@ module Lupin
     Lupin::Pipable.new files
   end
 
+  # Process and execute raw shell commands
+  def self.command(command)
+    # TODO allow multiple commands to be chained with &&
+    command_args = command.split(" ")
+    command_name = command_args.delete_at(0)
+    status = Process.run(command_name, args: command_args)
+    Lupin::Pipable.new status.exit_code
+  end
+
   # Run a task
   def self.run(name : String)
     @@tasks.each do |task|
@@ -88,7 +99,7 @@ end
 
 Lupin.set_debug true
 
-Lupin.task("Append hello world to all files", "test/*.txt", mode: "a")
-  .pipe(Lupin::Plugins::HelloWorld.new)
+# Don't run this with crystal run. Run crystal build src/lupin.cr first and use the binary.
+Lupin.task("command", "crystal -v").pipe(Lupin::PP.new)
 
-Lupin.run("Append hello world to all files")
+Lupin.run("command")

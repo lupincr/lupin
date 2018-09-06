@@ -18,6 +18,8 @@ module Lupin
 
       if task_mode == "directory"
         @pipable = Lupin::Pipable(Array(File)).new([] of File)
+      elsif task_mode == "command"
+        @pipable = Lupin::Pipable(Int32).new(0)
       else
         @pipable = Lupin::Pipable(Nil).new(nil)
       end
