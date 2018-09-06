@@ -99,7 +99,7 @@ end
 
 Lupin.set_debug true
 
-# Don't run this with crystal run. Run crystal build src/lupin.cr first and use the binary.
+# Don't run this with crystal run. Run crystal build src/lupin.cr - bin/lupin first and use the binary.
 Lupin.task("command", "crystal -v").pipe(Lupin::PP.new)
 
 Lupin.run("command")
