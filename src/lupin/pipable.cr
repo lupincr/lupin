@@ -1,11 +1,12 @@
 module Lupin
   class Pipable(T)
+    getter value
+
     def initialize(@value : T)
     end
 
     def pipe(plugin : Lupin::Plugin)
-      plugin.on("pre_execution")
-      plugin.exec(@value)
+      plugin.exec(@value.as(T))
     end
   end
 end

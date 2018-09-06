@@ -1,47 +1,66 @@
 # TODO: Write documentation for `Lupin`
 
 require "./lupin/*"
+require "./lupin/plugins/*"
 require "epilog"
 require "dir"
 
 module Lupin
   VERSION = "0.1.0"
-  DEBUG   = false
-
+  @@debug = false
   @@tasks = [] of Lupin::Task
   @@logger = Epilog::Logger.new
 
   # Creates a new task
-  def self.task(name)
-    task = Lupin::Task.new(name)
-    @@tasks.push(task)
-    if DEBUG
-      @@logger.debug "Task '#{name}' created."
+  def self.task(name : String, *params)
+    task = Lupin::Task.new(name, params.at(0))
+    @@tasks.push(task.as(Lupin::Task))
+
+    self._debug("Task '#{name}' created.")
+
+    task
+  end
+
+  # Override for tasks that do not start from nil
+  # This includes: commands, directory structures (files)
+  def self.task(name : String, param : String, mode = "w")
+    mode = self._get_mode(param)
+    task = self.task(name, {"mode" => mode})
+
+    if mode == "directory"
+      task.pipable = self.src(param, mode)
+      self._debug("Detected directory: #{param}")
     end
 
     task
   end
 
-  # Override for simple command-driven tasks
-  def self.task(name, command)
-    # TODO
-  end
-
-  # Override for tasks starting out with files
-  def self.task(name, pipable : Lupin::Pipable)
-    task = Lupin::Task.new(name)
-    task.pipable = pipable
-    @@tasks.push(task)
-    if DEBUG
-      @@logger.debug "Task '#{name}' created."
+  # Determines the task mode by the given param
+  def self._get_mode(param)
+    if param.includes?("/")
+      "directory"
+    elsif param.includes?(" ")
+      "command"
+    else
+      "default"
     end
-
-    task
   end
 
-  def self.src(path)
+  # Debugging utility
+  def self._debug(message)
+    if @@debug
+      @@logger.debug message
+    end
+  end
+
+  def self.set_debug(debug)
+    @@debug = debug
+  end
+
+  # Load files with the given mode, according to the given path
+  def self.src(path, mode)
     files = Dir.glob(path).map do |file_path|
-      File.open(file_path)
+      File.open(file_path, "w+")
     end
 
     Lupin::Pipable.new files
@@ -59,6 +78,7 @@ module Lupin
   end
 
   # Override to run multiple tasks
+  # To be used for default tasks.
   def self.run(tasks : Array)
     tasks.each do |task|
       self.run(task)
@@ -66,18 +86,9 @@ module Lupin
   end
 end
 
-class LupinAppendHelloWorld < Lupin::Plugin
-  def exec(value)
-    value + "Hello World."
-  end
-end
+Lupin.set_debug true
 
-Lupin.task("helloworld")
-  .pipe(LupinAppendHelloWorld.new)
-  .pipe(LupinAppendHelloWorld.new)
+Lupin.task("Append hello world to all files", "test/*.txt", mode: "a")
+  .pipe(Lupin::Plugins::HelloWorld.new)
 
-Lupin.task("helloworld2")
-  .pipe(LupinAppendHelloWorld.new)
-  .pipe(LupinAppendHelloWorld.new)
-
-Lupin.run(["helloworld", "helloworld2"])
+Lupin.run("Append hello world to all files")

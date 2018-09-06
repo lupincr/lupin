@@ -3,26 +3,35 @@ module Lupin
     getter name
     setter pipable
 
-    def initialize(@name : String)
+    def initialize(@name : String, *params)
       @pipe_classes = [] of Lupin::Plugin
-      @pipable = Lupin::Pipable(String).new("")
+
+      # Task mode can be the following:
+      # default: Task starts out with nil
+      # directory: Task starts out with an array of files according to the given path
+      # command: Task starts out with the given command being executed and its exit code returned
+      task_mode = "default"
+
+      if params.size > 0
+        task_mode = params.at(0).fetch("mode")
+      end
+
+      if task_mode == "directory"
+        @pipable = Lupin::Pipable(Array(File)).new([] of File)
+      else
+        @pipable = Lupin::Pipable(Nil).new(nil)
+      end
       @logger = Epilog::Logger.new
     end
 
-    def initialize(@name : String, pipable : Lupin::Pipable)
-      initialize(@name)
-      @pipable = pipable
-    end
-
     def run
-      previous_value = ""
-
-      @pipe_classes.each do |inLupince|
-        inLupince.on("pre_execution")
-        previous_value = inLupince.exec(previous_value)
-        inLupince.on("after_execution")
+      previous_value = @pipable.value
+      @pipe_classes.each do |instance|
+        instance.on("pre_execution")
+        previous_value = instance.exec(previous_value)
+        instance.on("after_execution")
         if previous_value.is_a?(Nil)
-          @logger.error("Pipe '#{inLupince.class.name}' failed for task '#{@name}'")
+          @logger.error("Pipe '#{instance.class.name}' failed for task '#{@name}'")
           Process.exit(1)
         end
       end
