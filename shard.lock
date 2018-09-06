@@ -1,0 +1,14 @@
+version: 1.0
+shards:
+  crayon:
+    github: crystalrealm/crayon
+    commit: 5486ebfeca12dd89e17ed3f96317f34990f98e22
+
+  epilog:
+    github: crystalrealm/epilog
+    commit: 2d1e13b5cd0b8eeb2f42b9707cfa0c642b17fdf7
+
+  stringpad:
+    github: crystalrealm/stringpad
+    commit: 27ed1fde22c2ae7d093beda95ed5be9620721183
+

@@ -1,0 +1,17 @@
+name: lupin
+version: 0.1.0
+
+authors:
+  - Mark Molnar <molnarpw@gmail.com>
+
+targets:
+  lupin:
+    main: src/lupin.cr
+
+dependencies:
+  epilog:
+    github: crystalrealm/epilog
+
+crystal: 0.26.0
+
+license: MIT
