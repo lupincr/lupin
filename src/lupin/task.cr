@@ -4,25 +4,9 @@ module Lupin
     setter pipe
 
     def initialize(@name : String, params, @debug = false)
-      @pipe_classes = [] of Lupin::Plugin
-
-      # Task mode can be the following:
-      # default: Task starts out with nil
-      # directory: Task starts out with an array of files according to the given path
-      # command: Task starts out with the given command being runuted and its exit code returned
-      task_mode = "default"
-
-      if params.size > 0
-        task_mode = params.fetch("mode")
-      end
-
-      if task_mode == "directory"
-        @pipe = Lupin::Pipe(Array(Lupin::InputFile)).new([] of Lupin::InputFile)
-      elsif task_mode == "command"
-        @pipe = Lupin::Pipe(Int32).new(0)
-      else
-        @pipe = Lupin::Pipe(Nil).new(nil)
-      end
+      @pipe_classes = [] of Plugin
+      # TODO discuss starting value
+      @pipe = Pipe(Bool).new(false)
       @logger = Epilog::Logger.new
     end
 
@@ -34,16 +18,51 @@ module Lupin
         instance.on("pre_run")
         previous_value = instance.run(previous_value)
         self.debug(previous_value)
-
         instance.on("after_run")
+
         if previous_value.is_a?(Nil)
-          @logger.error("Pipe '#{instance.class.name}' failed for task '#{@name}'")
-          Process.exit(1)
+          raise LupinException.new("Pipe '#{instance.class.name}' failed for task '#{@name}'. Possible nil return?")
         end
       end
     end
 
-    def pipe(plugin : Lupin::Plugin)
+    # Load files with the given mode, according to the given path
+    def src(path, mode = "w")
+      @mode = "file"
+      files = Dir.glob(path).map do |file_path|
+        name = File.basename(file_path)
+        path = File.dirname(file_path) + "/"
+        contents = File.read(file_path)
+        InputFile.new(name, path, contents)
+      end
+
+      @pipe = Pipe(Array(InputFile)).new files
+      self
+    end
+
+    def dist(out_path)
+      if @pipe.type != Array(InputFile)
+        raise LupinException.new("dist may only be used on Array(Lupin::InputFile)")
+      end
+
+      @pipe.value.as(Array(InputFile)).each do |file|
+        file.path = out_path
+
+        if !Dir.exists?(out_path)
+          Dir.mkdir_p(out_path)
+        end
+
+        file.write
+      end
+
+      self
+    end
+
+    def watch(dir)
+      raise LupinException.new("Not implemented.")
+    end
+
+    def pipe(plugin : Plugin)
       @pipe_classes.push(plugin)
       self
     end

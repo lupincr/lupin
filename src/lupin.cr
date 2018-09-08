@@ -6,31 +6,15 @@ require "dir"
 module Lupin
   VERSION = "0.1.0"
   @@debug = false
-  @@tasks = [] of Lupin::Task
+  @@tasks = [] of Task
   @@logger = Epilog::Logger.new
 
   # Creates a new task
-  def self.task(name : String, *params)
-    task = Lupin::Task.new(name, params.at(0), @@debug)
+  def self.task(name : String)
+    task = Task.new(name, @@debug)
     @@tasks.push(task.as(Lupin::Task))
 
     self.debug("Task '#{name}' created.")
-
-    task
-  end
-
-  # Override for tasks that do not start from nil
-  # This includes: commands, directory structures (files)
-  def self.task(name : String, param : String, mode = "w")
-    mode = self.get_mode(param)
-    task = self.task(name, {"mode" => mode})
-
-    if mode == "directory"
-      task.pipe = self.src(param, mode)
-      self.debug("Detected directory: #{param}")
-    elsif mode == "command"
-      task.pipe = self.command(param)
-    end
 
     task
   end
@@ -54,19 +38,8 @@ module Lupin
     end
   end
 
-  def self.set_debug(debug)
+  def self.debug_mode(debug)
     @@debug = debug
-  end
-
-  # Determines the task mode by the given param
-  private def self.get_mode(param)
-    if param.includes?("/")
-      "directory"
-    elsif param.includes?(" ")
-      "command"
-    else
-      "default"
-    end
   end
 
   # Debugging utility
@@ -76,29 +49,21 @@ module Lupin
     end
   end
 
-  # Load files with the given mode, according to the given path
-  private def self.src(path, mode)
-    files = Dir.glob(path).map do |file_path|
-      name = File.basename(file_path)
-      path = File.dirname(file_path) + "/"
-      contents = File.read(file_path)
-      Lupin::InputFile.new(name, path, contents)
-    end
-
-    Lupin::Pipe.new files
-  end
-
   # Process and execute raw shell commands
   private def self.command(command)
     # TODO allow multiple commands to be chained with &&
     command_args = command.split(" ")
     command_name = command_args.delete_at(0)
     status = Process.run(command_name, args: command_args)
-    Lupin::Pipe.new status.exit_code
+    Pipe.new status.exit_code
   end
 end
 
-Lupin.set_debug true
+Lupin.debug_mode true
 
-Lupin.task("command", "./test/*.txt")
+Lupin.task("command")
+  .src("./test/*.txt")
+  .pipe(Lupin::Plugins::HelloWorld.new)
+  .dist("./test2/")
+
 Lupin.run("command")
