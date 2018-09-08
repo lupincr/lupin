@@ -1,5 +1,9 @@
 version: 1.0
 shards:
+  bargs:
+    github: crystalrealm/bargs
+    version: 1.0.0
+
   crayon:
     github: crystalrealm/crayon
     commit: 5486ebfeca12dd89e17ed3f96317f34990f98e22

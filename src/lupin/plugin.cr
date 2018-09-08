@@ -1,6 +1,6 @@
 module Lupin
   abstract class Plugin
-    def exec
+    def run
     end
 
     def on(event_type : String)

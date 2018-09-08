@@ -9,6 +9,8 @@
 ## Roadmap
 
 - [x] Add an override for `Lupin.task` to create `Lupin.src` tasks
+- [ ] Add debug parameter to task creation which will `pp` all pipe outputs
+- [ ] Create a LupinInputFile type that holds the file path and the file content
 - [x] Add a `Lupin._debug` method to encapsulate all if DEBUG statements
 - [ ] Implement `Lupin.dist`
 - [ ] Implement `Lupin.watch`
