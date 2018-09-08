@@ -16,3 +16,7 @@ shards:
     github: crystalrealm/stringpad
     commit: 27ed1fde22c2ae7d093beda95ed5be9620721183
 
+  watcher:
+    github: faustinoaq/watcher
+    version: 0.3.0
+

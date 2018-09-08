@@ -13,6 +13,8 @@ dependencies:
     github: crystalrealm/epilog
   bargs:
     github: crystalrealm/bargs
+  watcher:
+    github: faustinoaq/watcher
 
 crystal: 0.26.0
 

@@ -1,7 +1,6 @@
 require "./lupin/*"
 require "./lupin/plugins/*"
 require "epilog"
-require "dir"
 
 module Lupin
   VERSION = "0.1.0"
@@ -23,9 +22,7 @@ module Lupin
   def self.run(name : String)
     @@tasks.each do |task|
       if name == task.name
-        @@logger.info("Running Task '#{name}'..")
         task.run
-        @@logger.success("Task '#{name}' finished successfully.")
       end
     end
   end
@@ -62,8 +59,8 @@ end
 Lupin.debug_mode true
 
 Lupin.task("command")
-  .src("./test/*.txt")
+  .watch("./test/*.txt")
   .pipe(Lupin::Plugins::HelloWorld.new)
-  .dist("./test2/")
+  .dist("./test/")
 
 Lupin.run("command")
