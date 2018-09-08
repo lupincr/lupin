@@ -17,7 +17,7 @@ module Lupin
       end
 
       if task_mode == "directory"
-        @pipe = Lupin::Pipe(Array(String)).new([] of String)
+        @pipe = Lupin::Pipe(Array(Lupin::InputFile)).new([] of Lupin::InputFile)
       elsif task_mode == "command"
         @pipe = Lupin::Pipe(Int32).new(0)
       else

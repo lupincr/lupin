@@ -79,7 +79,10 @@ module Lupin
   # Load files with the given mode, according to the given path
   private def self.src(path, mode)
     files = Dir.glob(path).map do |file_path|
-      File.read(file_path)
+      name = File.basename(file_path)
+      path = File.dirname(file_path) + "/"
+      contents = File.read(file_path)
+      Lupin::InputFile.new(name, path, contents)
     end
 
     Lupin::Pipe.new files
@@ -97,5 +100,5 @@ end
 
 Lupin.set_debug true
 
-Lupin.task("command", "echo test")
+Lupin.task("command", "./test/*.txt")
 Lupin.run("command")
