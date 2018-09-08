@@ -3,7 +3,7 @@ module Lupin
     getter name
     setter pipe
 
-    def initialize(@name : String, *params)
+    def initialize(@name : String, params, @debug = false)
       @pipe_classes = [] of Lupin::Plugin
 
       # Task mode can be the following:
@@ -11,16 +11,9 @@ module Lupin
       # directory: Task starts out with an array of files according to the given path
       # command: Task starts out with the given command being runuted and its exit code returned
       task_mode = "default"
-      debug_task = false
 
       if params.size > 0
-        params_hash = params.at(0)
-        task_mode = params_hash.fetch("mode")
-
-        # TODO
-        # if params_hash.has?("debug")
-        #   debug_task = true
-        # end
+        task_mode = params.fetch("mode")
       end
 
       if task_mode == "directory"
@@ -35,16 +28,14 @@ module Lupin
 
     def run
       previous_value = @pipe.value
+      self.debug(previous_value)
+
       @pipe_classes.each do |instance|
-        instance.on("pre_runution")
+        instance.on("pre_run")
         previous_value = instance.run(previous_value)
+        self.debug(previous_value)
 
-        # TODO
-        # if debug_task
-        #   pp previous_value
-        # end
-
-        instance.on("after_runution")
+        instance.on("after_run")
         if previous_value.is_a?(Nil)
           @logger.error("Pipe '#{instance.class.name}' failed for task '#{@name}'")
           Process.exit(1)
@@ -55,6 +46,12 @@ module Lupin
     def pipe(plugin : Lupin::Plugin)
       @pipe_classes.push(plugin)
       self
+    end
+
+    private def debug(value)
+      if @debug
+        @logger.log "Previous value of pipeline: #{value.to_s}"
+      end
     end
   end
 end

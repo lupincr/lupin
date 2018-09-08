@@ -11,7 +11,7 @@ module Lupin
 
   # Creates a new task
   def self.task(name : String, *params)
-    task = Lupin::Task.new(name, params.at(0))
+    task = Lupin::Task.new(name, params.at(0), @@debug)
     @@tasks.push(task.as(Lupin::Task))
 
     self.debug("Task '#{name}' created.")
