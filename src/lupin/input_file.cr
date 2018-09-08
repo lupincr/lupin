@@ -8,5 +8,6 @@ module Lupin
     setter name, path, contents
 
     def initialize(@name, @path, @contents)
+    end
   end
 end
