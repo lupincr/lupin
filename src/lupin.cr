@@ -81,4 +81,4 @@ Lupin.task("command")
   .pipe(Lupin::Plugins::HelloWorld.new)
   .dist("./test/")
 
-Lupin.run("command")
+# Lupin.run("command")
