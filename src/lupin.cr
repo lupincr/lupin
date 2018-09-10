@@ -39,6 +39,10 @@ module Lupin
     @@debug = debug
   end
 
+  def self.get_debug_mode
+    @@debug
+  end
+
   # Debugging utility
   private def self.debug(message)
     if @@debug
@@ -73,12 +77,3 @@ module Lupin
     end
   end
 end
-
-Lupin.debug_mode true
-
-Lupin.task("command")
-  .watch("./test/*.txt")
-  .pipe(Lupin::Plugins::HelloWorld.new)
-  .dist("./test/")
-
-# Lupin.run("command")

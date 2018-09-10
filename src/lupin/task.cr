@@ -2,7 +2,7 @@ require "watcher"
 
 module Lupin
   class Task
-    getter name
+    getter name, pipe, watch, dist, watch_path, dist_path, watch_block
     setter pipe
 
     def initialize(@name : String, params, @debug = false)
@@ -19,7 +19,7 @@ module Lupin
     end
 
     def run
-      @logger.info("Running Task '#{name}'..")
+      @logger.start("Running Task '#{name}'..")
 
       if @watch
         @logger.log("Watching for changes in #{@watch_path}..")
@@ -67,6 +67,7 @@ module Lupin
     def dist(out_path)
       @dist = true
       @dist_path = out_path
+      self
     end
 
     def run_dist
