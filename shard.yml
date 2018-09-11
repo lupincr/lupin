@@ -3,6 +3,7 @@ version: 0.1.0
 
 authors:
   - Mark Molnar <molnarpw@gmail.com>
+  - Milan Szekely <szekelymilan1125@gmail.com>
 
 targets:
   lupin:
