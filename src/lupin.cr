@@ -49,31 +49,4 @@ module Lupin
       @@logger.debug message
     end
   end
-
-  private def run_command(name, args)
-    status = Process.run(name, args: args)
-    status.exit_code
-  end
-
-  # Process and execute raw shell commands
-  private def self.command(command)
-    # TODO allow multiple commands to be chained with &&
-    if command.includes?("&&")
-      final_exit_code = 0
-      split_commands = command.split("&&")
-
-      split_commands.each do |text_command|
-        text_command = text_command.chomp
-        command_args = command.split(" ")
-        command_name = command_args.delete_at(0)
-        final_exit_code = run_command(command_name, command_args)
-      end
-
-      final_exit_code
-    else
-      command_args = command.split(" ")
-      command_name = command_args.delete_at(0)
-      run_command(command_name, command_args)
-    end
-  end
 end

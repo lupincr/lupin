@@ -9,6 +9,7 @@ module Lupin
       @pipe_classes = [] of Plugin
       # TODO discuss starting value
       @pipe = Pipe(Bool).new(false)
+      @commands = [] of Command
       @logger = Epilog::Logger.new
       @watch = false
       @dist = false
@@ -20,6 +21,14 @@ module Lupin
 
     def run
       @logger.start("Running Task '#{name}'..")
+
+      @commands.each do |command|
+        begin
+          run_command(command.name, command.args)
+        rescue
+          raise LupinException.new("Command '#{command.full}' failed on task '#{@name}'.")
+        end
+      end
 
       if @watch
         @logger.log("Watching for changes in #{@watch_path}..")
@@ -113,6 +122,25 @@ module Lupin
     def pipe(plugin : Plugin)
       @pipe_classes.push(plugin)
       self
+    end
+
+    # Process and execute raw shell commands
+    def command(command)
+      split_commands = command.split("&&")
+
+      split_commands.each do |text_command|
+        text_command = text_command.chomp
+        command_args = command.split(" ")
+        command_name = command_args.delete_at(0)
+        @commands.push(Command.new(command_name, command_args, text_command))
+      end
+
+      self
+    end
+
+    private def run_command(name, args)
+      status = Process.run(name, args: args)
+      status.exit_code
     end
 
     private def debug(value)
