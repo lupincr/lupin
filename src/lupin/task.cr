@@ -7,7 +7,6 @@ module Lupin
 
     def initialize(@name : String, params, @debug = false)
       @pipe_classes = [] of Plugin
-      # TODO discuss starting value
       @pipe = Pipe(Bool).new(false)
       @commands = [] of Command
       @logger = Epilog::Logger.new
@@ -55,9 +54,7 @@ module Lupin
         end
       end
 
-      if @dist
-        run_dist
-      end
+      run_dist if @dist
     end
 
     # Load files with the given mode, according to the given path
@@ -87,10 +84,7 @@ module Lupin
 
       @pipe.value.as(Array(InputFile)).each do |file|
         file.path = @dist_path
-
-        if !Dir.exists?(@dist_path)
-          Dir.mkdir_p(@dist_path)
-        end
+        Dir.mkdir_p(@dist_path) if !Dir.exists?(@dist_path)
 
         file.write
       end
@@ -144,9 +138,7 @@ module Lupin
     end
 
     private def debug(value)
-      if @debug
-        @logger.log "Previous value of pipeline: #{value.to_s}"
-      end
+      @logger.log "Previous value of pipeline: #{value.to_s}" if @debug
     end
   end
 end
