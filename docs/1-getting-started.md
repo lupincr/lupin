@@ -1,13 +1,5 @@
 # Getting Started
 
-<p align="center">
-  <b>
-    <a href="#">Commands</a> | <a href="#">Dist</a> | <a href="#">Src</a> | <a href="#">Watch</a> | <a href="#">Plugins</a>
-    <br>
-    Do you feel like the documentation could be extended, or changed somewhere? Don't hesitate to open a Pull Request.
-  </b>
-</p>
-
 Lupin comes with a handy tool, The Lupin CLI. The installation guide for that can be found over at [our website](http://lupincr.com) \
 Or you can simply copy this shell command and run it in your terminal:
 
