@@ -2,7 +2,7 @@
 
 <p align="center">
   <b>
-    <a href="#">Commands</a> | <a href="#">Dist</a> | <a href="#">Src</a> | <a href="#">Watch</a> | <a href="#">Plugins</a>
+    <a href="https://github.com/molnarmark/lupin/blob/master/docs/3-command.md">Command</a> | <a href="https://github.com/molnarmark/lupin/blob/master/docs/5-dist.md">Dist</a> | <a href="https://github.com/molnarmark/lupin/blob/master/docs/4-src.md">Src</a> | <a href="https://github.com/molnarmark/lupin/blob/master/docs/6-watch.md">Watch</a> | <a href="https://github.com/molnarmark/lupin/blob/master/docs/7-plugins.md">Plugins</a>
     <br>
     Do you feel like the documentation could be extended, or changed somewhere? Don't hesitate to open a Pull Request.
   </b>
@@ -76,8 +76,8 @@ You can also give the default task an array of task names, and they will run in 
 Lupin.default(["hello-world", "my-task", "my-second-task"])
 ```
 
-Next, lets talk about `src`.
+Next, lets talk about `command`.
 
 <p align="center">
-  <a href="#">Next</a>
+  <a href="https://github.com/molnarmark/lupin/blob/master/docs/3-command.md">Next</a>
 </p>

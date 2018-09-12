@@ -2,7 +2,7 @@
 
 <p align="center">
   <b>
-    <a href="#">Commands</a> | <a href="#">Dist</a> | <a href="#">Src</a> | <a href="#">Watch</a> | <a href="#">Plugins</a>
+    <a href="https://github.com/molnarmark/lupin/blob/master/docs/3-command.md">Command</a> | <a href="https://github.com/molnarmark/lupin/blob/master/docs/5-dist.md">Dist</a> | <a href="https://github.com/molnarmark/lupin/blob/master/docs/4-src.md">Src</a> | <a href="https://github.com/molnarmark/lupin/blob/master/docs/6-watch.md">Watch</a> | <a href="https://github.com/molnarmark/lupin/blob/master/docs/7-plugins.md">Plugins</a>
     <br>
     Do you feel like the documentation could be extended, or changed somewhere? Don't hesitate to open a Pull Request.
   </b>
@@ -36,7 +36,7 @@ As you can see, a simple plugin just inherits from `Lupin::Plugin`.
 
 A Lupin plugin must have a `run` method inside, and that will be called whenever the pipeline gets to that Plugin.
 
-_NOTE:_ Make sure you always return something from your run method that isn't `nil`.
+**NOTE:** Make sure you always return something from your run method that isn't `nil`.
 
 ## Community Plugins
 
