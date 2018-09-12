@@ -3,9 +3,9 @@
   <h2 align="center">All in one Task Runner for Crystal</h2>
 </p>
 <p align="center">
+  <img src="https://img.shields.io/badge/%E2%99%A5-built%20with%20crystal-6D27C2.svg">
   <img src="https://img.shields.io/github/license/lupincr/lupin.svg">
   <img src="https://img.shields.io/github/tag/lupincr/lupin.svg?maxAge=360">
-  <img src="https://travis-ci.org/lupincr/lupin.svg?branch=master">
   <img src="https://img.shields.io/circleci/project/github/lupincr/lupin/master.svg">
   <img src="https://img.shields.io/github/issues-pr/lupincr/lupin.svg">
   <img src="https://img.shields.io/github/issues/lupincr/lupin.svg">
