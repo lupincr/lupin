@@ -11,12 +11,12 @@
   <img src="https://img.shields.io/github/issues/lupincr/lupin.svg">
 </p>
 
-# Lupin
+# 🐺 Lupin
 
 Lupin is heavily inspired by [Gulp]("http://gulpjs.com") and tries to keep the API as close to Gulp's as possible.
 We want to make it easy for JavaScripters who might not have a Ruby background to experience the power that Crystal provides.
 
-## Why?
+## ❓ History of Lupin
 
 Lupin was developed with one simple concept in mind. While Crystal already comes with a lot of helpful built in commands, we felt that there is room to improve.
 
@@ -24,19 +24,19 @@ You can just toss a `lupinfile.cr` inside your project, and have multiple tasks 
 
 Lupin gets rid of all the time consumed by executing commands.
 
-Automate your workflow instead, and spend more time writing Crystal code - something you truly **love**!
+Automate your workflow instead, and spend more time writing Crystal code - something you truly **love**! 💙
 
-## Documentation
+## 🖺 Documentation
 
 You can find all the documentation that helps you get started working with Lupin [here](https://github.com/lupincr/lupin/tree/master/docs).
 
-## Maintainers
+## 👥 Maintainers
 
 Lupin is maintained by 2 JavaScript programmers.
 
 - Mark Molnar - Initial concept, designing & implementation of Lupin
 - Milan Szekely - Website maintainer, active Lupin contributor
 
-## License
+## 📃 License
 
 Lupin is released under the MIT License.
