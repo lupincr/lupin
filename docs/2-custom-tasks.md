@@ -50,7 +50,7 @@ This plugin comes with **Lupin**, so all you need to do is create a dummy direct
 
 A task can have as many pipes as you may want, the first pipe will receive the initial value of the task, and the next will receive the output from the previous pipe, and so on. It's that simple!
 
-For more information regarding Lupin's Plugin capabilities, please take a look <a href="#">here</a>.
+For more information regarding Lupin's Plugin capabilities, please take a look <a href="https://github.com/molnarmark/lupin/blob/master/docs/7-plugins.md">here</a>.
 
 ## Pipes
 
@@ -58,7 +58,7 @@ Every **Lupin** task has a `pipe` method, which accepts any class that inherits 
 
 Instead of passing blocks, we decided to use the plugin system as a default way to attach functionality to a task.
 
-About plugins, please read the [Plugin Documentation](plugindocs)
+About plugins, please read the [Plugin Documentation](https://github.com/molnarmark/lupin/blob/master/docs/7-plugins.md)
 
 ## Default tasks
 
