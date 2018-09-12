@@ -26,4 +26,12 @@ describe Lupin do
     task.dist.should eq true
     task.dist_path.should eq "./spec/data_out"
   end
+
+  it "works with a shell command" do
+    task = Lupin.task("command_task")
+      .command("touch ./spec/test.txt")
+
+    Lupin.run("command_task")
+    File.exists?("./spec/test.txt").should eq true
+  end
 end
