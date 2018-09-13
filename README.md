@@ -30,6 +30,8 @@ Automate your workflow instead, and spend more time writing Crystal code - somet
 
 You can find all the documentation that helps you get started working with Lupin [here](https://github.com/lupincr/lupin/tree/master/docs).
 
+Please bear with us as we are further extending the documentation with **relevant** information.
+
 ## 👥 Maintainers
 
 Lupin is maintained by 2 JavaScript programmers.
