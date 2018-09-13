@@ -18,6 +18,8 @@ We want to make it easy for JavaScripters who use Gulp on a regular basis, but m
 
 Lupin is here to fill that space!
 
+**NOTE:** Lupin is pretty new and currently lacks examples. Please give us time to build some useful plugins, or if you'd like, play around with Lupin yourself and show us the result!
+
 ## ❓ History of Lupin
 
 Lupin was developed with one simple concept in mind. While Crystal already comes with a lot of helpful built in commands, we felt that there is room to improve.
