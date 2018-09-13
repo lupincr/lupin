@@ -2,7 +2,7 @@
 
 <p align="center">
   <b>
-    <a href="https://github.com/molnarmark/lupin/blob/master/docs/3-command.md">Command</a> | <a href="https://github.com/molnarmark/lupin/blob/master/docs/5-dist.md">Dist</a> | <a href="https://github.com/molnarmark/lupin/blob/master/docs/4-src.md">Src</a> | <a href="https://github.com/molnarmark/lupin/blob/master/docs/6-watch.md">Watch</a> | <a href="https://github.com/molnarmark/lupin/blob/master/docs/7-plugins.md">Plugins</a>
+    <a href="https://github.com/lupincr/lupin/blob/master/docs/3-command.md">Command</a> | <a href="https://github.com/lupincr/lupin/blob/master/docs/5-dist.md">Dist</a> | <a href="https://github.com/lupincr/lupin/blob/master/docs/4-src.md">Src</a> | <a href="https://github.com/lupincr/lupin/blob/master/docs/6-watch.md">Watch</a> | <a href="https://github.com/lupincr/lupin/blob/master/docs/7-plugins.md">Plugins</a>
     <br>
     Do you feel like the documentation could be extended, or changed somewhere? Don't hesitate to open a Pull Request.
   </b>
@@ -50,7 +50,7 @@ This plugin comes with **Lupin**, so all you need to do is create a dummy direct
 
 A task can have as many pipes as you may want, the first pipe will receive the initial value of the task, and the next will receive the output from the previous pipe, and so on. It's that simple!
 
-For more information regarding Lupin's Plugin capabilities, please take a look <a href="https://github.com/molnarmark/lupin/blob/master/docs/7-plugins.md">here</a>.
+For more information regarding Lupin's Plugin capabilities, please take a look <a href="https://github.com/lupincr/lupin/blob/master/docs/7-plugins.md">here</a>.
 
 ## Pipes
 
@@ -58,7 +58,7 @@ Every **Lupin** task has a `pipe` method, which accepts any class that inherits 
 
 Instead of passing blocks, we decided to use the plugin system as a default way to attach functionality to a task.
 
-About plugins, please read the [Plugin Documentation](https://github.com/molnarmark/lupin/blob/master/docs/7-plugins.md)
+About plugins, please read the [Plugin Documentation](https://github.com/lupincr/lupin/blob/master/docs/7-plugins.md)
 
 ## Default tasks
 
@@ -79,5 +79,5 @@ Lupin.default(["hello-world", "my-task", "my-second-task"])
 Next, lets talk about `command`.
 
 <p align="center">
-  <a href="https://github.com/molnarmark/lupin/blob/master/docs/3-command.md">Next</a>
+  <a href="https://github.com/lupincr/lupin/blob/master/docs/3-command.md">Next</a>
 </p>
