@@ -7,6 +7,7 @@ module Lupin
   @@debug = false
   @@tasks = [] of Task
   @@logger = Epilog::Logger.new
+  @@default_tasks : Array(String) = [] of String
 
   # Creates a new task
   def self.task(name : String)
@@ -33,6 +34,18 @@ module Lupin
     tasks.each do |task|
       self.run(task)
     end
+  end
+
+  def self.default(subtask : String)
+    @@default_tasks.push(subtask)
+  end
+
+  def self.default(subtasks : Array(String))
+    @@default_tasks = subtasks
+  end
+
+  def self.run_default
+    self.run(@@default_tasks)
   end
 
   def self.debug_mode(debug)
