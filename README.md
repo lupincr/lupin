@@ -14,7 +14,9 @@
 # 🐺 Lupin
 
 Lupin is heavily inspired by [Gulp](http://gulpjs.com) and tries to keep the API as close to Gulp's as possible.
-We want to make it easy for JavaScripters who might not have a Ruby background to experience the power that Crystal provides.
+We want to make it easy for JavaScripters who use Gulp on a regular basis, but miss it from their workflow when working with Crystal.
+
+Lupin is here to fill that space!
 
 ## ❓ History of Lupin
 
