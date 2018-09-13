@@ -12,7 +12,7 @@ Lupin comes with a handy tool, The Lupin CLI. The installation guide for that ca
 Or you can simply copy this shell command and run it in your terminal:
 
 ```sh
-command here
+curl -s https://lupincr.com/install/lupin.sh | sh
 ```
 
 The installation script is dead simple. It will create a directory inside your `$HOME`, called **.lupin** which will contain the binary for the Lupin CLI.
