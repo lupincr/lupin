@@ -3,7 +3,7 @@ require "./lupin/plugins/*"
 require "epilog"
 
 module Lupin
-  VERSION = "1.1.0@alpha"
+  VERSION = "1.0.0@alpha"
   @@debug = false
   @@tasks = [] of Task
   @@logger = Epilog::Logger.new

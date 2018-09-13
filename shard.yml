@@ -12,6 +12,7 @@ targets:
 dependencies:
   epilog:
     github: crystalrealm/epilog
+    version: 1.1.1
   bargs:
     github: crystalrealm/bargs
   watcher:
