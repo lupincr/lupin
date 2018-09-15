@@ -5,6 +5,8 @@ module Lupin
     getter name, pipe, watch, dist, watch_path, dist_path, watch_block
     setter pipe
 
+    @pipe : Pipe(Bool) | Pipe(Array(InputFile)) | Pipe(String)
+
     def initialize(@name : String, params, @debug = false)
       @pipe_classes = [] of Plugin
       @pipe = Pipe(Bool).new(false)
